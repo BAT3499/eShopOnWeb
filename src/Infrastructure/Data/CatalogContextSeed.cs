@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.eShopWeb.ApplicationCore.Entities;
 using Microsoft.Extensions.Logging;
 
-namespace Microsoft.eShopWeb.Infrastructure.Data;
+namespace Microsoft.eShopWeb.Infrastructure.Data; 
 
 public class CatalogContextSeed
 {
@@ -50,7 +50,7 @@ public class CatalogContextSeed
             if (retryForAvailability >= 10) throw;
 
             retryForAvailability++;
-            
+
             logger.LogError(ex.Message);
             await SeedAsync(catalogContext, logger, retryForAvailability);
             throw;
@@ -61,10 +61,11 @@ public class CatalogContextSeed
     {
         return new List<CatalogBrand>
             {
-                new("Azure"),
-                new(".NET"),
-                new("Visual Studio"),
-                new("SQL Server"),
+                new("Champion"),
+                new("Legacy"),
+                new("League"),
+                new("Nordic"),
+                new("CI sport"),
                 new("Other")
             };
     }
@@ -73,10 +74,11 @@ public class CatalogContextSeed
     {
         return new List<CatalogType>
             {
-                new("Mug"),
-                new("T-Shirt"),
-                new("Sheet"),
-                new("USB Memory Stick")
+                new("Hoods"),
+                new("Caps"),
+                new("Drinkware"),
+                new("Mugs"),
+                new("Face Masks")
             };
     }
 
@@ -84,18 +86,16 @@ public class CatalogContextSeed
     {
         return new List<CatalogItem>
             {
-                new(2,2, ".NET Bot Black Sweatshirt", ".NET Bot Black Sweatshirt", 19.5M,  "http://catalogbaseurltobereplaced/images/products/1.png"),
-                new(1,2, ".NET Black & White Mug", ".NET Black & White Mug", 8.50M, "http://catalogbaseurltobereplaced/images/products/2.png"),
-                new(2,5, "Prism White T-Shirt", "Prism White T-Shirt", 12,  "http://catalogbaseurltobereplaced/images/products/3.png"),
-                new(2,2, ".NET Foundation Sweatshirt", ".NET Foundation Sweatshirt", 12, "http://catalogbaseurltobereplaced/images/products/4.png"),
-                new(3,5, "Roslyn Red Sheet", "Roslyn Red Sheet", 8.5M, "http://catalogbaseurltobereplaced/images/products/5.png"),
-                new(2,2, ".NET Blue Sweatshirt", ".NET Blue Sweatshirt", 12, "http://catalogbaseurltobereplaced/images/products/6.png"),
-                new(2,5, "Roslyn Red T-Shirt", "Roslyn Red T-Shirt",  12, "http://catalogbaseurltobereplaced/images/products/7.png"),
-                new(2,5, "Kudu Purple Sweatshirt", "Kudu Purple Sweatshirt", 8.5M, "http://catalogbaseurltobereplaced/images/products/8.png"),
-                new(1,5, "Cup<T> White Mug", "Cup<T> White Mug", 12, "http://catalogbaseurltobereplaced/images/products/9.png"),
-                new(3,2, ".NET Foundation Sheet", ".NET Foundation Sheet", 12, "http://catalogbaseurltobereplaced/images/products/10.png"),
-                new(3,2, "Cup<T> Sheet", "Cup<T> Sheet", 8.5M, "http://catalogbaseurltobereplaced/images/products/11.png"),
-                new(2,5, "Prism White TShirt", "Prism White TShirt", 12, "http://catalogbaseurltobereplaced/images/products/12.png")
+                new(3,5, "LEAGUE FACEMASK - SWEATER STYLE", "LEAGUE FACEMASK - SWEATER STYLE", 3.25,  "https://shop.css.edu/collections/face-masks/products/league-facemask-sweater-style"),
+                new(3,5, "LEAGUE HEATHER CHAMP FACE COVERING - GREY WITH NAVY SHIELDS", "LEAGUE HEATHER CHAMP FACE COVERING - GREY WITH NAVY SHIELDS", 3.99, "https://shop.css.edu/collections/face-masks/products/league-heather-champ-face-covering-grey-with-navy-shields"),
+                new(1,1, "CHAMPION REVERSE WEAVE HOOD - OATMEAL", "CHAMPION REVERSE WEAVE HOOD - OATMEAL", 59.99,  "https://shop.css.edu/collections/hoods/products/champion-reverse-weave-hood-oatmeal"),
+                new(5,1, "CI SPORT CSS PULLOVER HOOD - CHARCOAL HEATHER", "CI SPORT CSS PULLOVER HOOD - CHARCOAL HEATHER", 49.99, "https://shop.css.edu/collections/hoods/products/ci-sport-css-pullover-hood-charcoal-heather"),
+                new(2,2, "LEGACY DTA - NAVY TRUCKER WITH MESH BACK", "LEGACY DTA - NAVY TRUCKER WITH MESH BACK", 24.99, "https://shop.css.edu/collections/caps/products/legacy-navy-trucker-with-mesh-back"),
+                new(1,2, "CHAMPION TWILL UNSTRUCTED CAP - WHITE", "CHAMPION TWILL UNSTRUCTED CAP - WHITE", 19.99, "https://shop.css.edu/collections/caps/products/champion-twill-unstructed-cap-white"),
+                new(4,3, "NORDIC WIDE MOUTH WATER BOTTLE - NAVY", "NORDIC WIDE MOUTH WATER BOTTLE - NAVY",  14.99, "https://shop.css.edu/collections/drinkware/products/nordic-wide-mouth-water-bottle-navy"),
+                new(6,4, "HUDSON TRAVEL MUG - GRAPHITE", "HUDSON TRAVEL MUG - GRAPHITE", 7.99, "https://shop.css.edu/collections/mugs-1/products/hudson-travel-mug-graphite"),
+                new(6,1, "UNDER ARMOUR AMOUR FLEECE PULLOVER HOOD - TRUE GREY HEATHER", "CUNDER ARMOUR AMOUR FLEECE PULLOVER HOOD - TRUE GREY HEATHER", 61.99, "https://shop.css.edu/collections/hoods/products/under-armour-amour-fleece-pullover-hood-true-grey-heather"),
             };
     }
+}
 }
