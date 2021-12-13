@@ -21,6 +21,7 @@ public class CatalogViewModelService : ICatalogViewModelService
     private readonly IRepository<CatalogItem> _itemRepository;
     private readonly IRepository<CatalogBrand> _brandRepository;
     private readonly IRepository<CatalogType> _typeRepository;
+    private readonly IRepository<CatalogVendor> _vendorRepository;
     private readonly IUriComposer _uriComposer;
 
     public CatalogViewModelService(
@@ -28,11 +29,13 @@ public class CatalogViewModelService : ICatalogViewModelService
         IRepository<CatalogItem> itemRepository,
         IRepository<CatalogBrand> brandRepository,
         IRepository<CatalogType> typeRepository,
+        IRepository<CatalogVendor> vendorRepository,
         IUriComposer uriComposer)
     {
         _logger = loggerFactory.CreateLogger<CatalogViewModelService>();
         _itemRepository = itemRepository;
         _brandRepository = brandRepository;
+        _vendorRepository = vendorRepository;
         _typeRepository = typeRepository;
         _uriComposer = uriComposer;
     }
@@ -61,8 +64,10 @@ public class CatalogViewModelService : ICatalogViewModelService
             }).ToList(),
             Brands = (await GetBrands()).ToList(),
             Types = (await GetTypes()).ToList(),
+            Vendors = (await GetVendors()).ToList(),
             BrandFilterApplied = brandId ?? 0,
             TypesFilterApplied = typeId ?? 0,
+            VendorFilterApplied = vendorId ?? 0,
             PaginationInfo = new PaginationInfoViewModel()
             {
                 ActualPage = pageIndex,
@@ -109,4 +114,21 @@ public class CatalogViewModelService : ICatalogViewModelService
 
         return items;
     }
+
+    public async Task<IEnumerable<SelectListItem>> GetVendors()
+    {
+        _logger.LogInformation("GetVendors called.");
+        var vendors = await _vendorRepository.ListAsync();
+
+        var items = vendors
+            .Select(vendor => new SelectListItem() { Value = vendor.Id.ToString(), Text = vendor.Vendor })
+            .OrderBy(b => b.Text)
+            .ToList();
+
+        var allItem = new SelectListItem() { Value = null, Text = "All", Selected = true };
+        items.Insert(0, allItem);
+
+        return items;
+    }
+}
 }
