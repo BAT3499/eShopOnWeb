@@ -48,4 +48,20 @@ public class Order : BaseEntity, IAggregateRoot
         }
         return total;
     }
+
+    public decimal Tax() 
+    {
+        Total totalObj = new Total();
+
+        var tax = 0.6 * totalObj.total;
+        return tax;
+    }
+
+    public decimal GrandTotal()
+    {
+        Total totalObj = new Total();
+        Tax taxObj = new Tax();
+
+        var grandTotal = totalObj.total + taxObj.tax;
+    }
 }
